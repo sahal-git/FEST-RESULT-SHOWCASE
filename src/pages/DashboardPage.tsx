@@ -10,6 +10,8 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { ResultCardSkeleton } from '@/components/ResultCardSkeleton';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { fireConfetti } from '@/lib/confetti';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 const StatItem = ({ label, value }: { label: string, value: string | number }) => (
     <div className="flex flex-col items-center justify-center p-2 text-center">
@@ -266,6 +268,24 @@ const DashboardPage = () => {
               </p>
           </div>
       </footer>
+
+      {/* Floating Action Button */}
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            onClick={fireConfetti}
+            disabled={loading}
+            className="fixed bottom-8 right-8 z-50 h-16 w-16 rounded-full shadow-lg bg-gradient-primary text-primary-foreground transition-transform hover:scale-110 active:scale-100"
+            size="icon"
+          >
+            <PartyPopper className="h-7 w-7" />
+            <span className="sr-only">Celebrate</span>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent side="left">
+          <p>Let's Celebrate!</p>
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 };
