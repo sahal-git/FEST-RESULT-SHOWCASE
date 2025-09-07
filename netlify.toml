@@ -1,16 +1,12 @@
-# This file provides explicit build instructions for Netlify,
-# ensuring it uses the correct package manager and Node.js version.
+# This file provides explicit build instructions for Netlify.
 [build]
   # Specifies the command to build the project.
   command = "yarn build"
-  
   # Specifies the directory that contains the built assets.
   publish = "dist"
 
-# Specifies build-time environment variables.
 [build.environment]
-  # Pins the Node.js version for consistent builds.
+  # Sets a stable Node.js version for the build environment.
   NODE_VERSION = "20"
-  
-  # Pins the Yarn version for consistency.
+  # Ensures a specific version of Yarn is used.
   YARN_VERSION = "1.22.19"
