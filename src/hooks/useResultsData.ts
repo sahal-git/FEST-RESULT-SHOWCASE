@@ -99,15 +99,14 @@ export const useResultsData = ({ webappUrl }: UseResultsDataProps) => {
       console.log(JSON.stringify(jsonData, null, 2));
       console.log('=== END JSON DATA ===');
       
-      if (jsonData.length === 0) {
-        throw new Error("No valid data found in the response.");
-      }
-      
       setData(jsonData);
-      toast({
-        title: "Data loaded successfully",
-        description: `Found ${jsonData.length} result entries`,
-      });
+      
+      if (jsonData.length > 0) {
+        toast({
+          title: "Data loaded successfully",
+          description: `Found ${jsonData.length} result entries`,
+        });
+      }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Unknown error occurred";
       setError(errorMessage);

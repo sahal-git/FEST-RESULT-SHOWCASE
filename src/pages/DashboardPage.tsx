@@ -38,6 +38,10 @@ const DashboardPage = () => {
     };
   }, []);
 
+  const hasAnyPublishedResults = useMemo(() => {
+    return data.some(entry => entry.status && entry.status.toLowerCase() === 'published');
+  }, [data]);
+
   const filteredData = useMemo(() => {
     return data.filter(entry => {
       const matchesSearch = !searchTerm || 
@@ -66,7 +70,7 @@ const DashboardPage = () => {
       groups[key].push(entry);
     });
     
-    // Filter groups to only include those with at least one "Published" grade
+    // Filter groups to only include those with at least one "Published" status
     const filteredGroups: Record<string, ResultEntry[]> = {};
     Object.entries(groups).forEach(([key, entries]) => {
       const hasPublishedStatus = entries.some(entry => 
@@ -81,7 +85,6 @@ const DashboardPage = () => {
 
     // Sort the filtered groups by the latest entry (assuming later entries are more recent)
     const sortedGroupEntries = Object.entries(filteredGroups).sort((a, b) => {
-      // Find the latest entry in each group based on its position in the original data array
       const getLatestIndex = (entries: ResultEntry[]) => {
         return Math.max(...entries.map(entry => 
           data.findIndex(dataEntry => 
@@ -99,7 +102,6 @@ const DashboardPage = () => {
       return latestIndexB - latestIndexA;
     });
 
-    // Convert back to object while maintaining the sorted order
     const sortedGroups: Record<string, ResultEntry[]> = {};
     sortedGroupEntries.forEach(([key, entries]) => {
       sortedGroups[key] = entries;
@@ -150,6 +152,16 @@ const DashboardPage = () => {
                 })}
             </div>
         )
+    }
+
+    if (!hasAnyPublishedResults) {
+      return (
+        <div className="text-center py-16 rounded-lg border border-dashed">
+            <Trophy className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">No Results Published Yet</h3>
+            <p className="text-muted-foreground mb-4">The celebration is about to begin! Results are being tallied.</p>
+        </div>
+      );
     }
 
     return (
