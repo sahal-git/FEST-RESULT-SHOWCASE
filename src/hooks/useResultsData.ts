@@ -84,20 +84,20 @@ export const useResultsData = ({ webappUrl }: UseResultsDataProps) => {
       }
       
       // Log the raw CSV data to console
-      console.log('=== RAW CSV DATA ===');
-      console.log(csvText);
-      console.log('=== END CSV DATA ===');
+      // console.log('=== RAW CSV DATA ===');
+      // console.log(csvText);
+      // console.log('=== END CSV DATA ===');
       
       const jsonData = csvToJson(csvText);
       
       // Log the converted JSON data to console
-      console.log('=== CONVERTED JSON DATA ===');
-      console.log('Total entries:', jsonData.length);
-      console.log('Sample entries (first 5):');
-      console.log(JSON.stringify(jsonData.slice(0, 5), null, 2));
-      console.log('All data:');
-      console.log(JSON.stringify(jsonData, null, 2));
-      console.log('=== END JSON DATA ===');
+      // console.log('=== CONVERTED JSON DATA ===');
+      // console.log('Total entries:', jsonData.length);
+      // console.log('Sample entries (first 5):');
+      // console.log(JSON.stringify(jsonData.slice(0, 5), null, 2));
+      // console.log('All data:');
+      // console.log(JSON.stringify(jsonData, null, 2));
+      // console.log('=== END JSON DATA ===');
       
       setData(jsonData);
       
